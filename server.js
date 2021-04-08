@@ -9,9 +9,10 @@ require("dotenv/config");
 const registerRoute = require("./routes/route_register");
 const loginRoute = require("./routes/route_login");
 const userRoute = require("./routes/route_user");
+const usersRoute = require("./routes/route_users");
 
 //PRIPOJENIE NA DB
-mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true }, () => {
+mongoose.connect(process.env.DB_CONNECTION, { useUnifiedTopology: true, useNewUrlParser: true }, () => {
     console.log("> Connected to DB");
 });
 
@@ -26,6 +27,7 @@ app.use(express.json());
 app.use("/register", registerRoute);
 app.use("/login", loginRoute);
 app.use("/user", userRoute);
+app.use("/users", usersRoute);
 
 //NASTAVENIE PORTU
 port = process.env.port || 3000;
